@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Gaur - Vedic Astrology Charts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Utilities and Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #05020c;
+            overflow-x: hidden;
+        }
+        /* Glassmorphism Class Definition */
+        .glasscard {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px border;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        /* Canvas Layering */
+        #cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        /* 3D Carousel Styles */
+        .carousel-container {
+            perspective: 1000px;
+        }
+        .carousel-track {
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .carousel-item {
+            backface-visibility: hidden;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+    </style>
+</head>
+<body class="text-gray-100 font-sans antialiased">
+
+    <canvas id="cosmic-bg"></canvas>
+
+    <a href="https://wa.me/919518470971?text=Hi%20Astro%20Gaur,%20I%20want%20to%20get%20my%20Vedic%20Astrology%20Chart%20analyzed." 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl transition-transform hover:scale-115 active:scale-95 duration-300">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <nav class="fixed top-0 left-0 w-full z-40 glasscard border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-amber-500 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fas fa-sun text-xl text-white animate-spin-slow"></i>
+                </div>
+                <span class="text-xl font-bold tracking-wider uppercase bg-gradient-to-r from-amber-400 to-purple-400 bg-clip-text text-transparent">Astro Gaur</span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide">
+                <a href="#home" class="hover:text-amber-400 transition-colors">Home</a>
+                <a href="about.html" class="hover:text-amber-400 transition-colors">About Us</a>
+                <a href="#astrologer" class="hover:text-amber-400 transition-colors">The Astrologer</a>
+                <a href="#testimonials" class="hover:text-amber-400 transition-colors">Testimonials</a>
+                <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
+                <a href="https://wa.me/919518470971" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold shadow-md hover:opacity-90 transition-opacity">Consult Now</a>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-2xl focus:outline-none text-left">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glasscard w-full border-t border-white/5 px-6 py-6 space-y-4 text-left">
+            <a href="#home" class="block hover:text-amber-400 transition-colors">Home</a>
+            <a href="about.html" class="block hover:text-amber-400 transition-colors">About Us</a>
+            <a href="#astrologer" class="block hover:text-amber-400 transition-colors">The Astrologer</a>
+            <a href="#testimonials" class="block hover:text-amber-400 transition-colors">Testimonials</a>
+            <a href="#contact" class="block hover:text-amber-400 transition-colors">Contact</a>
+            <a href="https://wa.me/919518470971" target="_blank" class="block text-center py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold">Consult Now</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-20">
+
+        <section id="home" class="min-h-screen flex items-center px-6 max-w-7xl mx-auto">
+            <div class="max-w-2xl text-left space-y-6">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 glasscard rounded-full text-xs text-amber-400 font-semibold tracking-wide uppercase">
+                    <i class="fas fa-star text-[10px]"></i><span>Decode Your Cosmic Destiny</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+                    Ancient Vedic Astrology <br>
+                    <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-purple-500 bg-clip-text text-transparent">Mapped for Your Modern Life</span>
+                </h1>
+                <p class="text-gray-400 text-lg leading-relaxed">
+                    Discover how planetary transits, houses, and constellations dictate your career, relationship patterns, and financial trajectories. Get clarity directly from your customized birth chart.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                    <a href="https://wa.me/919518470971" target="_blank" class="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-center shadow-lg hover:scale-102 transition-transform flex items-center justify-center space-x-3">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        <span>Analyze My Chart on WhatsApp</span>
+                    </a>
+                    <a href="#astrologer" class="px-8 py-4 glasscard hover:bg-white/10 text-center rounded-xl font-bold transition-colors">
+                        Meet the Astrologer
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="astrologer" class="py-24 px-6 max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-purple-600 to-amber-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
+                    <div class="relative glasscard rounded-2xl p-4 overflow-hidden aspect-square flex items-center justify-center border border-white/10">
+                        <i class="fas fa-user-astronaut text-8xl text-purple-400/40"></i>
+                    </div>
+                </div>
+                <div class="text-left space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">The Mastery Behind Astro Gaur</h2>
+                    <p class="text-gray-400 leading-relaxed">
+                        Rooted deeply in centuries-old authentic Vedic principles, Astro Gaur translates complex planetary placements into straightforward, tactical directives. No generic predictions—only highly customized, data-backed readings of your natal birth charts.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="glasscard p-4 rounded-xl text-left">
+                            <h4 class="text-amber-400 font-bold text-2xl">5000+</h4>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider mt-1">Charts Decoded</p>
+                        </div>
+                        <div class="glasscard p-4 rounded-xl text-left">
+                            <h4 class="text-purple-400 font-bold text-2xl">100%</h4>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider mt-1">Authentic Remedies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-24 px-6 max-w-7xl mx-auto overflow-hidden text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Transformative Success Stories</h2>
+            
+            <div class="carousel-container relative max-w-md mx-auto h-72 flex items-center justify-center">
+                <div id="carousel-track" class="w-full h-full relative flex items-center justify-center">
+                    <div class="carousel-item absolute w-full glasscard p-8 rounded-2xl border border-white/10 text-left space-y-4 opacity-100">
+                        <div class="flex items-center space-x-1 text-amber-400">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 italic">"The timing predicted for my career shift was accurate to the week. Absolutely mind-blowing clarity!"</p>
+                        <h4 class="font-bold text-amber-400 text-sm tracking-wide">- Tech Product Founder</h4>
+                    </div>
+                    <div class="carousel-item absolute w-full glasscard p-8 rounded-2xl border border-white/10 text-left space-y-4 opacity-0">
+                        <div class="flex items-center space-x-1 text-amber-400">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 italic">"Astro Gaur's remedies for my business struggles were practical and yielded clear results in months."</p>
+                        <h4 class="font-bold text-purple-400 text-sm tracking-wide">- Agency Lead Innovator</h4>
+                    </div>
+                    <div class="carousel-item absolute w-full glasscard p-8 rounded-2xl border border-white/10 text-left space-y-4 opacity-0">
+                        <div class="flex items-center space-x-1 text-amber-400">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 italic">"Extremely analytical insights. Not a single trace of generic superstitions."</p>
+                        <h4 class="font-bold text-orange-400 text-sm tracking-wide">- Senior Data Architect</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center space-x-4 mt-8">
+                <button id="prev-btn" class="w-12 h-12 rounded-full glasscard hover:bg-white/10 transition-colors flex items-center justify-center text-sm"><i class="fas fa-arrow-left"></i></button>
+                <button id="next-btn" class="w-12 h-12 rounded-full glasscard hover:bg-white/10 transition-colors flex items-center justify-center text-sm"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24 px-6 max-w-4xl mx-auto text-center">
+            <div class="glasscard p-12 rounded-3xl border border-white/10 space-y-8">
+                <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Connect with Your Cosmic Map</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
+                    Have precise details ready (Date, exact time, and place of birth) for an immediate analysis on WhatsApp, or connect with our official channels across social spaces.
+                </p>
+                
+                <div class="pt-2">
+                    <a href="https://wa.me/919518470971" target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl font-bold shadow-lg transition-transform hover:scale-102">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <span>Initiate Chart Setup</span>
+                    </a>
+                </div>
+
+                <hr class="border-white/5 my-8">
+
+                <div class="flex justify-center space-x-6 text-2xl">
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-500 transition-colors" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-pink-500 transition-colors" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 transition-colors" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-600 transition-colors" title="Facebook"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // --- 1. Responsive Navbar Controller Logic ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- 2. Three.js Space / Moving Constellations Engine ---
+        const canvas = document.getElementById('cosmic-bg');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create deep starfield particle network vectors
+        const starCount = 600;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(starCount * 3);
+
+        for(let i = 0; i < starCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 45;     // X Space
+            positions[i+1] = (Math.random() - 0.5) * 45;   // Y Space
+            positions[i+2] = (Math.random() - 0.5) * 45;   // Z Space
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        // Styling the individual points
+        const material = new THREE.PointsMaterial({
+            color: 0x9f7aea, // Subtle cosmic purple tint matching theme palette
+            size: 0.08,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
+        });
+
+        const starField = new THREE.Points(geometry, material);
+        scene.add(starField);
+        camera.position.z = 20;
+
+        // Interaction state track parameters
+        let targetX = 0, targetY = 0;
+        let scrollYTarget = 0;
+
+        // Mouse/Touch Move Input Perturbation Tracking Logic
+        function updateInteractionCoords(clientX, clientY) {
+            targetX = (clientX / window.innerWidth - 0.5) * 3;
+            targetY = (clientY / window.innerHeight - 0.5) * 3;
+        }
+
+        window.addEventListener('mousemove', (e) => updateInteractionCoords(e.clientX, e.clientY));
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                updateInteractionCoords(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        // Continuous Background Scroll Tracking Controller
+        window.addEventListener('scroll', () => {
+            scrollYTarget = window.scrollY * 0.005;
+        });
+
+        // Dynamic System Animation Rendering Loop Setup
+        const clock = new THREE.Clock();
+
+        function animateLoop() {
+            requestAnimationFrame(animateLoop);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Perpetual passive ambient structural spin movement rules
+            starField.rotation.y = elapsedTime * 0.02;
+            starField.rotation.x = elapsedTime * 0.01;
+
+            // Interpolate tracking metrics fluidly based on touch coordinates + scroll velocity
+            starField.position.x += (targetX - starField.position.x) * 0.05;
+            starField.position.y += (-targetY - starField.position.y) * 0.05;
+            starField.position.z += (scrollYTarget - starField.position.z) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+        animateLoop();
+
+        // Canvas Window Resizing Handler Logic
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- 3. Interactive 3D Testimonials Carousel Logic ---
+        const items = document.querySelectorAll('.carousel-item');
+        let activeIdx = 0;
+
+        function updateCarouselView() {
+            items.forEach((item, idx) => {
+                let offset = idx - activeIdx;
+                // Loop handling configurations
+                if (offset < -1) offset += items.length;
+                if (offset > 1) offset -= items.length;
+
+                if (offset === 0) {
+                    item.style.transform = "translateZ(0px) rotateY(0deg)";
+                    item.style.opacity = "1";
+                    item.style.zIndex = "30";
+                } else if (offset === 1) {
+                    item.style.transform = "translateX(40px) translateZ(-150px) rotateY(-35deg)";
+                    item.style.opacity = "0.4";
+                    item.style.zIndex = "20";
+                } else if (offset === -1) {
+                    item.style.transform = "translateX(-40px) translateZ(-150px) rotateY(35deg)";
+                    item.style.opacity = "0.4";
+                    item.style.zIndex = "20";
+                } else {
+                    item.style.transform = "translateZ(-300px)";
+                    item.style.opacity = "0";
+                    item.style.zIndex = "10";
+                }
+            });
+        }
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            activeIdx = (activeIdx + 1) % items.length;
+            updateCarouselView();
+        });
+
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            activeIdx = (activeIdx - 1 + items.length) % items.length;
+            updateCarouselView();
+        });
+
+        // Launch initial render layout state
+        updateCarouselView();
+    </script>
+</body>
+</html>
