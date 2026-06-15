@@ -16,14 +16,14 @@
         body {
             background-color: #05020c;
             overflow-x: hidden;
+            color-scheme: dark; /* Ensures native date/time pickers match the dark theme */
         }
         /* Glassmorphism Class Definition */
         .glasscard {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px border;
-            border-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
         /* Canvas Layering */
         #cosmic-bg {
@@ -53,14 +53,11 @@
 
     <canvas id="cosmic-bg"></canvas>
 
-    <a href="https://wa.me/919518470971?text=Hi%20Astro%20Gaur,%20I%20want%20to%20get%20my%20Vedic%20Astrology%20Chart%20analyzed." 
-       target="_blank" 
-       rel="noopener noreferrer"
-       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl transition-transform hover:scale-115 active:scale-95 duration-300">
+    <button class="wa-trigger fixed bottom-6 right-6 z-40 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl transition-transform hover:scale-115 active:scale-95 duration-300 focus:outline-none">
         <i class="fab fa-whatsapp"></i>
-    </a>
+    </button>
 
-    <nav class="fixed top-0 left-0 w-full z-40 glasscard border-b border-white/5">
+    <nav class="fixed top-0 left-0 w-full z-30 glasscard border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-amber-500 rounded-full flex items-center justify-center shadow-lg">
@@ -75,7 +72,7 @@
                 <a href="#astrologer" class="hover:text-amber-400 transition-colors">The Astrologer</a>
                 <a href="#testimonials" class="hover:text-amber-400 transition-colors">Testimonials</a>
                 <a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a>
-                <a href="https://wa.me/919518470971" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold shadow-md hover:opacity-90 transition-opacity">Consult Now</a>
+                <button class="wa-trigger px-5 py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold shadow-md hover:opacity-90 transition-opacity">Consult Now</button>
             </div>
 
             <button id="menu-btn" class="md:hidden text-2xl focus:outline-none text-left">
@@ -89,9 +86,50 @@
             <a href="#astrologer" class="block hover:text-amber-400 transition-colors">The Astrologer</a>
             <a href="#testimonials" class="block hover:text-amber-400 transition-colors">Testimonials</a>
             <a href="#contact" class="block hover:text-amber-400 transition-colors">Contact</a>
-            <a href="https://wa.me/919518470971" target="_blank" class="block text-center py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold">Consult Now</a>
+            <button class="wa-trigger w-full block text-center py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold">Consult Now</button>
         </div>
     </nav>
+
+    <div id="wa-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-md opacity-0 transition-opacity duration-300 px-4">
+        <div id="wa-modal-content" class="glasscard w-full max-w-md p-8 rounded-3xl border border-white/10 relative transform scale-95 transition-transform duration-300">
+            <button id="close-modal" class="absolute top-5 right-5 text-gray-400 hover:text-white transition-colors focus:outline-none">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div class="text-left mb-6">
+                <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-1">Claim Your Free Reading</h3>
+                <p class="text-gray-400 text-sm">Enter your exact birth details to ask your 1 free astrological question.</p>
+            </div>
+
+            <form id="wa-form" class="space-y-4 text-left">
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">Full Name</label>
+                    <input type="text" id="wa-name" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition-colors placeholder-gray-600" placeholder="e.g. Rahul Sharma">
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">Date of Birth</label>
+                        <input type="date" id="wa-dob" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">Birth Time</label>
+                        <input type="time" id="wa-time" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition-colors">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-purple-400 uppercase tracking-wider mb-1">Birth City / Place</label>
+                    <input type="text" id="wa-place" required class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400 transition-colors placeholder-gray-600" placeholder="e.g. New Delhi">
+                </div>
+
+                <button type="submit" class="w-full mt-4 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-center shadow-lg hover:scale-102 transition-transform flex items-center justify-center space-x-3">
+                    <i class="fab fa-whatsapp text-xl text-white"></i>
+                    <span class="text-white">Submit to WhatsApp</span>
+                </button>
+            </form>
+        </div>
+    </div>
 
     <main class="relative z-10 pt-20">
 
@@ -108,25 +146,32 @@
                     Discover how planetary transits, houses, and constellations dictate your career, relationship patterns, and financial trajectories. Get clarity directly from your customized birth chart.
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
-                    <a href="https://wa.me/919518470971" target="_blank" class="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-center shadow-lg hover:scale-102 transition-transform flex items-center justify-center space-x-3">
-                        <i class="fab fa-whatsapp text-xl"></i>
-                        <span>Analyze My Chart on WhatsApp</span>
-                    </a>
+                    <button class="wa-trigger px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl font-bold text-center shadow-lg hover:scale-102 transition-transform flex items-center justify-center space-x-3">
+                        <i class="fab fa-whatsapp text-xl text-white"></i>
+                        <span class="text-white">Analyze My Chart on WhatsApp</span>
+                    </button>
                     <a href="#astrologer" class="px-8 py-4 glasscard hover:bg-white/10 text-center rounded-xl font-bold transition-colors">
                         Meet the Astrologer
                     </a>
                 </div>
             </div>
         </section>
-
+        
         <section id="astrologer" class="py-24 px-6 max-w-7xl mx-auto">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="relative group">
+                <div id="tilt-container" class="relative group w-full aspect-square max-w-md mx-auto md:mx-0" style="perspective: 1000px;">
                     <div class="absolute -inset-1 bg-gradient-to-tr from-purple-600 to-amber-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-                    <div class="relative glasscard rounded-2xl p-4 overflow-hidden aspect-square flex items-center justify-center border border-white/10">
-                        <i class="fas fa-user-astronaut text-8xl text-purple-400/40"></i>
+                    
+                    <div id="astrologer-card" class="relative w-full h-full glasscard rounded-2xl overflow-hidden border border-white/10 select-none touch-none transition-all duration-200 ease-out shadow-2xl">
+                        <img src="./assets/image.png" 
+                             alt="Astro Gaur Expert" 
+                             class="w-full h-full object-cover rounded-2xl pointer-events-none transform scale-105 transition-transform duration-500 group-hover:scale-100"
+                             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=600&auto=format&fit=crop'; console.warn('Local asset missing, running elegant network fallback.');">
+                        
+                        <div id="card-shine" class="absolute inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-300" style="background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 60%);"></div>
                     </div>
                 </div>
+                
                 <div class="text-left space-y-6">
                     <h2 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">The Mastery Behind Astro Gaur</h2>
                     <p class="text-gray-400 leading-relaxed">
@@ -145,6 +190,50 @@
                 </div>
             </div>
         </section>
+
+        <script>
+            (function initMVPTiltEngine() {
+                const container = document.getElementById('tilt-container');
+                const card = document.getElementById('astrologer-card');
+                const shine = document.getElementById('card-shine');
+                
+                if (!container || !card || !shine) return;
+
+                function handleMove(e) {
+                    const rect = container.getBoundingClientRect();
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                    
+                    const relativeX = clientX - rect.left;
+                    const relativeY = clientY - rect.top;
+                    
+                    const midX = rect.width / 2;
+                    const midY = rect.height / 2;
+                    
+                    const rotationX = ((midY - relativeY) / midY) * 12;
+                    const rotationY = ((relativeX - midX) / midX) * 12;
+                    
+                    card.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg) scale3d(1.03, 1.03, 1.03)`;
+                    
+                    const percentX = (relativeX / rect.width) * 100;
+                    const percentY = (relativeY / rect.height) * 100;
+                    shine.style.opacity = "1";
+                    shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%)`;
+                }
+
+                function handleRelease() {
+                    card.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    shine.style.opacity = "0";
+                }
+
+                container.addEventListener('pointermove', handleMove);
+                container.addEventListener('pointerleave', handleRelease);
+                container.addEventListener('pointerup', handleRelease);
+                
+                container.addEventListener('touchmove', handleMove, { passive: true });
+                container.addEventListener('touchend', handleRelease);
+            })();
+        </script>
 
         <section id="testimonials" class="py-24 px-6 max-w-7xl mx-auto overflow-hidden text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-12 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Transformative Success Stories</h2>
@@ -189,19 +278,25 @@
                 </p>
                 
                 <div class="pt-2">
-                    <a href="https://wa.me/919518470971" target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl font-bold shadow-lg transition-transform hover:scale-102">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                        <span>Initiate Chart Setup</span>
-                    </a>
+                    <button class="wa-trigger inline-flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl font-bold shadow-lg transition-transform hover:scale-102">
+                        <i class="fab fa-whatsapp text-2xl text-white"></i>
+                        <span class="text-white">Initiate Chart Setup</span>
+                    </button>
                 </div>
 
                 <hr class="border-white/5 my-8">
 
                 <div class="flex justify-center space-x-6 text-2xl">
-                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-500 transition-colors" title="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-pink-500 transition-colors" title="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 transition-colors" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-600 transition-colors" title="Facebook"><i class="fab fa-facebook"></i></a>
+                </div>
+
+                <div class="pt-6 text-sm text-gray-400 space-y-2">
+                    <p>
+                        <a href="terms-and-conditions.html" class="underline hover:text-amber-300">Terms &amp; Conditions</a>
+                        <span class="mx-2">•</span>
+                        <a href="privacy-policy.html" class="underline hover:text-amber-300">Privacy Policy</a>
+                    </p>
                 </div>
             </div>
         </section>
@@ -209,14 +304,78 @@
     </main>
 
     <script>
-        // --- 1. Responsive Navbar Controller Logic ---
+        // --- 1. WhatsApp Modal Intercept Logic ---
+        const waModal = document.getElementById('wa-modal');
+        const waModalContent = document.getElementById('wa-modal-content');
+        const waTriggers = document.querySelectorAll('.wa-trigger');
+        const closeModalBtn = document.getElementById('close-modal');
+        const waForm = document.getElementById('wa-form');
+
+        // Open Modal
+        waTriggers.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                waModal.classList.remove('hidden');
+                waModal.classList.add('flex');
+                // Slight delay for transition effects
+                setTimeout(() => {
+                    waModal.classList.remove('opacity-0');
+                    waModalContent.classList.remove('scale-95');
+                }, 10);
+            });
+        });
+
+        // Close Modal Function
+        const closeModal = () => {
+            waModal.classList.add('opacity-0');
+            waModalContent.classList.add('scale-95');
+            setTimeout(() => {
+                waModal.classList.add('hidden');
+                waModal.classList.remove('flex');
+            }, 300);
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+        
+        // Close on clicking outside the card
+        waModal.addEventListener('click', (e) => {
+            if (e.target === waModal) closeModal();
+        });
+
+        // Handle Form Submission to WhatsApp
+        waForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get user inputs
+            const name = document.getElementById('wa-name').value.trim();
+            const dob = document.getElementById('wa-dob').value;
+            const time = document.getElementById('wa-time').value;
+            const place = document.getElementById('wa-place').value.trim();
+            const question = document.getElementById('wa-question').value.trim();
+
+            // Format WhatsApp Message (Line breaks encoded as %0A)
+            const waNumber = "919518470971"; 
+            const textMessage = `Hi Astro Gaur! I would like to get my Vedic Chart analyzed.%0A%0A*My Details:*%0AName: ${name}%0ADOB: ${dob}%0ATime: ${time}%0APlace: ${place}%0A%0A*My 1 Free Question:*%0A${question}`;
+
+            const waLink = `https://wa.me/${waNumber}?text=${textMessage}`;
+
+            // Open WhatsApp in new tab
+            window.open(waLink, '_blank');
+            
+            // Reset form and close modal
+            waForm.reset();
+            closeModal();
+        });
+
+
+        // --- 2. Responsive Navbar Controller Logic ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // --- 2. Three.js Space / Moving Constellations Engine ---
+        // --- 3. Three.js Space / Moving Constellations Engine ---
         const canvas = document.getElementById('cosmic-bg');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -225,29 +384,53 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Create deep starfield particle network vectors
-        const starCount = 600;
-        const geometry = new THREE.BufferGeometry();
-        const positions = new Float32Array(starCount * 3);
+        // Create a programmatic soft-glow texture (Zero external image loading, ultra-low RAM)
+        const glowCanvas = document.createElement('canvas');
+        glowCanvas.width = 32;
+        glowCanvas.height = 32;
+        const glowCtx = glowCanvas.getContext('2d');
+        const glowGradient = glowCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+        glowGradient.addColorStop(0, 'rgba(255, 255, 255, 1)'); 
+        glowGradient.addColorStop(0.3, 'rgba(159, 122, 234, 0.8)'); // Cosmic purple matching 0x9f7aea
+        glowGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        glowCtx.fillStyle = glowGradient;
+        glowCtx.fillRect(0, 0, 32, 32);
+        const starTexture = new THREE.CanvasTexture(glowCanvas);
 
-        for(let i = 0; i < starCount * 3; i += 3) {
-            positions[i] = (Math.random() - 0.5) * 45;     // X Space
-            positions[i+1] = (Math.random() - 0.5) * 45;   // Y Space
-            positions[i+2] = (Math.random() - 0.5) * 45;   // Z Space
+        // Grouping to maintain exact original movement logic while separating twinkle phases
+        const starField = new THREE.Group(); 
+        const starGroups = [];
+
+        // Split 600 stars into 3 lightweight groups to allow separate twinkling frequencies
+        for (let j = 0; j < 3; j++) {
+            const starCount = 200;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(starCount * 3);
+
+            for(let i = 0; i < starCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 45;     // X Space
+                positions[i+1] = (Math.random() - 0.5) * 45;   // Y Space
+                positions[i+2] = (Math.random() - 0.5) * 45;   // Z Space
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            // Styling the individual points with glow and additive blending
+            const material = new THREE.PointsMaterial({
+                color: 0xffffff, // White to allow the gradient texture colors to show accurately
+                size: 0.4 + (Math.random() * 0.2), // Increased size to show the soft glow edges
+                map: starTexture,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false // Prevents black square occlusion artifacts
+            });
+
+            const points = new THREE.Points(geometry, material);
+            starGroups.push(points);
+            starField.add(points);
         }
 
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        // Styling the individual points
-        const material = new THREE.PointsMaterial({
-            color: 0x9f7aea, // Subtle cosmic purple tint matching theme palette
-            size: 0.08,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-
-        const starField = new THREE.Points(geometry, material);
         scene.add(starField);
         camera.position.z = 20;
 
@@ -280,6 +463,11 @@
             requestAnimationFrame(animateLoop);
             const elapsedTime = clock.getElapsedTime();
 
+            // Lightweight Twinkle Execution: Modulate opacity mathematically for two of the groups
+            starGroups[0].material.opacity = 0.4 + Math.sin(elapsedTime * 2.5) * 0.5; // Fast twinkle
+            starGroups[1].material.opacity = 0.4 + Math.sin(elapsedTime * 1.2) * 0.5; // Slow twinkle
+            // starGroups[2] remains completely static to maintain a solid background density
+
             // Perpetual passive ambient structural spin movement rules
             starField.rotation.y = elapsedTime * 0.02;
             starField.rotation.x = elapsedTime * 0.01;
@@ -300,14 +488,13 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // --- 3. Interactive 3D Testimonials Carousel Logic ---
+        // --- 4. Interactive 3D Testimonials Carousel Logic ---
         const items = document.querySelectorAll('.carousel-item');
         let activeIdx = 0;
 
         function updateCarouselView() {
             items.forEach((item, idx) => {
                 let offset = idx - activeIdx;
-                // Loop handling configurations
                 if (offset < -1) offset += items.length;
                 if (offset > 1) offset -= items.length;
 
@@ -341,7 +528,6 @@
             updateCarouselView();
         });
 
-        // Launch initial render layout state
         updateCarouselView();
     </script>
 </body>

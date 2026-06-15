@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions - Astro Gaur</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Utilities and Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #05020c;
+            overflow-x: hidden;
+        }
+        /* Glassmorphism Class Definition */
+        .glasscard {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        /* Canvas Layering */
+        #cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="text-gray-100 font-sans antialiased">
+
+    <canvas id="cosmic-bg"></canvas>
+
+    <a href="https://wa.me/919518470971?text=Hi%20Astro%20Gaur,%20I%20have%20reviewed%20your%20terms%20and%20conditions%20document." 
+       target="_blank" 
+       rel="noopener noreferrer"
+       class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-2xl transition-transform hover:scale-115 active:scale-95 duration-300">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <nav class="fixed top-0 left-0 w-full z-40 glasscard border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-tr from-purple-600 to-amber-500 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fas fa-sun text-xl text-white"></i>
+                </div>
+                <span class="text-xl font-bold tracking-wider uppercase bg-gradient-to-r from-amber-400 to-purple-400 bg-clip-text text-transparent">Astro Gaur</span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8 font-medium text-sm tracking-wide">
+                <a href="index.html#home" class="hover:text-amber-400 transition-colors">Home</a>
+                <a href="about.html" class="hover:text-amber-400 transition-colors">About Us</a>
+                <a href="index.html#astrologer" class="hover:text-amber-400 transition-colors">The Astrologer</a>
+                <a href="index.html#testimonials" class="hover:text-amber-400 transition-colors">Testimonials</a>
+                <a href="index.html#contact" class="hover:text-amber-400 transition-colors">Contact</a>
+                <a href="https://wa.me/919518470971" target="_blank" class="px-5 py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold shadow-md hover:opacity-90 transition-opacity">Consult Now</a>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-2xl focus:outline-none text-left">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glasscard w-full border-t border-white/5 px-6 py-6 space-y-4 text-left">
+            <a href="index.html#home" class="block hover:text-amber-400 transition-colors">Home</a>
+            <a href="about.html" class="block hover:text-amber-400 transition-colors">About Us</a>
+            <a href="index.html#astrologer" class="block hover:text-amber-400 transition-colors">The Astrologer</a>
+            <a href="index.html#testimonials" class="block hover:text-amber-400 transition-colors">Testimonials</a>
+            <a href="index.html#contact" class="block hover:text-amber-400 transition-colors">Contact</a>
+            <a href="https://wa.me/919518470971" target="_blank" class="block text-center py-2.5 bg-gradient-to-r from-purple-600 to-amber-600 rounded-xl font-semibold">Consult Now</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-32 pb-12 px-6 max-w-4xl mx-auto min-h-screen text-left space-y-8">
+        <div class="space-y-2">
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                Terms & Conditions
+            </h1>
+            <p class="text-xs text-amber-400 font-semibold uppercase tracking-wider">Last Updated: June 2026</p>
+        </div>
+
+        <div class="glasscard p-8 md:p-12 rounded-3xl border border-white/10 space-y-6 leading-relaxed text-gray-300 text-sm">
+            <p>
+                Welcome to Astro Gaur. By accessing this website and initiating consultations across our connected communication pipelines, you accept and agree to follow these Terms & Conditions.
+            </p>
+
+            <h3 class="text-lg font-bold text-white pt-2">1. Scope of Services</h3>
+            <p>
+                Astro Gaur provides calculations, interpretations, and astrological consulting blueprints based exclusively on ancient Vedic mathematical parameters. All personalized outputs require the clear provision of exact birth details (time, date, place) by the end-user.
+            </p>
+
+            <h3 class="text-lg font-bold text-white pt-2">2. Critical Advisory & Scientific Disclaimer</h3>
+            <p>
+                Astrological data interpretations map environmental trends, natural psychological thresholds, and cyclical patterns. 
+            </p>
+            <blockquote class="border-l-2 border-amber-500 pl-4 my-2 italic text-gray-400">
+                Any consulting directives shared by Astro Gaur do not substitute for formal professional frameworks, including psychiatric evaluation, medical diagnostics, legal council, or certified financial planning. Action taken based on our analyses is at the user's explicit risk.
+            </blockquote>
+
+            <h3 class="text-lg font-bold text-white pt-2">3. User Commitments & Transaction Rules</h3>
+            <p>
+                Users agree to provide precise and truthful birth specifications to secure calculation accuracy. Any engagement or billing operations initialized through external networks or directly over private chat modules are final. Payments made for digital natal blueprints, time-intensive readings, and customized remedies are non-refundable once data processing has begun.
+            </p>
+
+            <h3 class="text-lg font-bold text-white pt-2">4. Brand Protection & Intellectual Property</h3>
+            <p>
+                The branding graphics, structural website layout frameworks, proprietary mathematical explanations, text manifests, and custom 3D design configurations displayed across Astro Gaur are protected under creative copyright frameworks. No entity may copy, scrape, or republish structural elements without written authorization.
+            </p>
+
+            <h3 class="text-lg font-bold text-white pt-2">5. Limitation of Structural Liability</h3>
+            <p>
+                Astro Gaur and its associated developers or practitioners are not responsible for any direct, indirect, systemic, or psychological outcomes resulting from the translation or application of chart readings. Decisions made by individuals remain entirely their own sovereign responsibility.
+            </p>
+        </div>
+
+        <section id="contact" class="py-6 text-center">
+            <div class="glasscard p-12 rounded-3xl border border-white/10 space-y-8">
+                <h2 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">Connect with Our Space</h2>
+                <div class="flex justify-center space-x-6 text-2xl">
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-red-500 transition-colors" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-pink-500 transition-colors" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-500 transition-colors" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-600 transition-colors" title="Facebook"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        const canvas = document.getElementById('cosmic-bg');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const starCount = 600;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(starCount * 3);
+
+        for(let i = 0; i < starCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 45;
+            positions[i+1] = (Math.random() - 0.5) * 45;
+            positions[i+2] = (Math.random() - 0.5) * 45;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const material = new THREE.PointsMaterial({ color: 0x9f7aea, size: 0.08, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending });
+        const starField = new THREE.Points(geometry, material);
+        scene.add(starField);
+        camera.position.z = 20;
+
+        let targetX = 0, targetY = 0, scrollYTarget = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            targetX = (e.clientX / window.innerWidth - 0.5) * 3;
+            targetY = (e.clientY / window.innerHeight - 0.5) * 3;
+        });
+        window.addEventListener('scroll', () => { scrollYTarget = window.scrollY * 0.005; });
+
+        const clock = new THREE.Clock();
+        function animateLoop() {
+            requestAnimationFrame(animateLoop);
+            const elapsedTime = clock.getElapsedTime();
+            starField.rotation.y = elapsedTime * 0.02;
+            starField.rotation.x = elapsedTime * 0.01;
+            starField.position.x += (targetX - starField.position.x) * 0.05;
+            starField.position.y += (-targetY - starField.position.y) * 0.05;
+            starField.position.z += (scrollYTarget - starField.position.z) * 0.05;
+            renderer.render(scene, camera);
+        }
+        animateLoop();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
